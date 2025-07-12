@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/main_padding">
+
+            <!-- AI Assistant Button -->
+            <LinearLayout
+                android:id="@+id/btnAIAssistant"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/ai_assistant_button_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/ai_icon_background"
+                    android:gravity="center"
+                    android:layout_marginEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🤖"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI Assistant"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get help with your CV"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:textSize="20sp"
+                    android:textColor="#999999" />
+
+            </LinearLayout>
+
+            <!-- Template Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose a CV Template"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Template Carousel -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp">
+
+                    <!-- Template 1 -->
+                    <LinearLayout
+                        android:id="@+id/template1"
+                        android:layout_width="140dp"
+                        android:layout_height="180dp"
+                        android:background="@drawable/template_card_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:layout_marginEnd="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="#FFFFFF"
+                            android:orientation="vertical"
+                            android:padding="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="12dp"
+                                android:background="#4A90E2"
+                                android:layout_marginBottom="4dp" />
+
+                            <View
+                                android:layout_width="60dp"
+                                android:layout_height="8dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginBottom="2dp" />
+
+                            <View
+                                android:layout_width="80dp"
+                                android:layout_height="6dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginBottom="8dp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginBottom="4dp" />
+
+                            <View
+                                android:layout_width="70dp"
+                                android:layout_height="6dp"
+                                android:background="#E0E0E0" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Modern"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:text="Use Template"
+                            android:textSize="12sp"
+                            android:background="@drawable/button_primary"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                    <!-- Template 2 -->
+                    <LinearLayout
+                        android:id="@+id/template2"
+                        android:layout_width="140dp"
+                        android:layout_height="180dp"
+                        android:background="@drawable/template_card_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:layout_marginEnd="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="#FFFFFF"
+                            android:orientation="vertical"
+                            android:padding="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="10dp"
+                                android:background="#333333"
+                                android:layout_marginBottom="6dp" />
+
+                            <View
+                                android:layout_width="70dp"
+                                android:layout_height="6dp"
+                                android:background="#666666"
+                                android:layout_marginBottom="2dp" />
+
+                            <View
+                                android:layout_width="60dp"
+                                android:layout_height="6dp"
+                                android:background="#666666"
+                                android:layout_marginBottom="8dp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#333333"
+                                android:layout_marginBottom="6dp" />
+
+                            <View
+                                android:layout_width="80dp"
+                                android:layout_height="5dp"
+                                android:background="#999999" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Classic"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:text="Use Template"
+                            android:textSize="12sp"
+                            android:background="@drawable/button_primary"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                    <!-- Template 3 -->
+                    <LinearLayout
+                        android:id="@+id/template3"
+                        android:layout_width="140dp"
+                        android:layout_height="180dp"
+                        android:background="@drawable/template_card_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="#F8F9FA"
+                            android:orientation="horizontal"
+                            android:padding="6dp"
+                            android:layout_marginBottom="8dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingEnd="4dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="8dp"
+                                    android:background="#6C63FF"
+                                    android:layout_marginBottom="4dp" />
+
+                                <View
+                                    android:layout_width="40dp"
+                                    android:layout_height="4dp"
+                                    android:background="#E0E0E0"
+                                    android:layout_marginBottom="2dp" />
+
+                                <View
+                                    android:layout_width="50dp"
+                                    android:layout_height="4dp"
+                                    android:background="#E0E0E0" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.6"
+                                android:orientation="vertical"
+                                android:background="#6C63FF"
+                                android:padding="4dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="6dp"
+                                    android:background="#FFFFFF"
+                                    android:layout_marginBottom="3dp" />
+
+                                <View
+                                    android:layout_width="20dp"
+                                    android:layout_height="4dp"
+                                    android:background="#FFFFFF" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Elegant"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:text="Use Template"
+                            android:textSize="12sp"
+                            android:background="@drawable/button_primary"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/section_margin">
+
+                <TextView
+                    android:id="@+id/btnStartNewCV"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="12dp"
+                    android:text="Start New CV"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    android:background="@drawable/button_primary"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnContinueEditing"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:text="Continue Editing"
+                    android:textColor="#4A90E2"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    android:background="@drawable/button_secondary"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+            <!-- Recent CVs -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Recent CVs"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:id="@+id/recentCVContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#F8F9FA"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/recentCVItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:background="@drawable/section_button_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📄"
+                        android:textSize="24sp"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtRecentCVName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Professional CV"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A" />
+
+                        <TextView
+                            android:id="@+id/txtRecentCVDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Last edited today"
+                            android:textSize="12sp"
+                            android:textColor="#666666" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtRecentCVProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="75%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#4A90E2"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=">"
+                        android:textSize="20sp"
+                        android:textColor="#999999" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <!-- AdMob Banner - Properly positioned -->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="20dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6483271377992812/1525407412" />
+
+    </LinearLayout>
+
+</ScrollView>

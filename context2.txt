@@ -1,0 +1,198 @@
+Here is a Markdown guide for implementing **AdMob banner and interstitial ads** in your **CV Builder AI app** built with **Java or Kotlin**. This uses the **real production AdMob App ID and Ad Unit IDs** you've provided.
+
+---
+
+````markdown
+# 📱 AdMob Integration Guide for CV Builder AI App
+
+This document outlines how to implement **Banner** and **Interstitial Ads** using **Google AdMob** in a CV/Resumé Builder Android app developed in **Java or Kotlin**.
+
+---
+
+## 🔧 AdMob Details (Production IDs)
+
+| Type               | App ID                                   | Ad Unit ID                                |
+|--------------------|-------------------------------------------|--------------------------------------------|
+| App ID             | `ca-app-pub-6483271377992812~4462561949` |
+| Banner Ad Unit     | `ca-app-pub-6483271377992812/1525407412` |
+| Interstitial Ad Unit | `ca-app-pub-6483271377992812/1699284347` |
+
+---
+
+## 📥 Step 1: Add Dependencies
+
+In your **`build.gradle (Project)`** file:
+
+```gradle
+buildscript {
+    dependencies {
+        classpath 'com.google.gms:google-services:4.4.0'
+    }
+}
+````
+
+In your **`build.gradle (App)`** file:
+
+```gradle
+plugins {
+    id 'com.google.gms.google-services'
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:23.0.0'
+}
+```
+
+---
+
+## 📱 Step 2: Add App ID to AndroidManifest.xml
+
+```xml
+<manifest>
+    <application
+        android:label="CV Builder AI"
+        android:icon="@mipmap/ic_launcher">
+        
+        <!-- Add the AdMob App ID here -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6483271377992812~4462561949"/>
+        
+    </application>
+</manifest>
+```
+
+---
+
+## 📊 Step 3: Initialize Mobile Ads in MainActivity
+
+### Kotlin
+
+```kotlin
+import com.google.android.gms.ads.MobileAds
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(this) {}
+    }
+}
+```
+
+### Java
+
+```java
+import com.google.android.gms.ads.MobileAds;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(this, initializationStatus -> {});
+    }
+}
+```
+
+---
+
+## 📺 Step 4: Load a Banner Ad
+
+### XML (layout file)
+
+```xml
+<com.google.android.gms.ads.AdView
+    android:id="@+id/adView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    ads:adSize="BANNER"
+    ads:adUnitId="ca-app-pub-6483271377992812/1525407412"/>
+```
+
+### Kotlin
+
+```kotlin
+val adView = findViewById<AdView>(R.id.adView)
+val adRequest = AdRequest.Builder().build()
+adView.loadAd(adRequest)
+```
+
+### Java
+
+```java
+AdView adView = findViewById(R.id.adView);
+AdRequest adRequest = new AdRequest.Builder().build();
+adView.loadAd(adRequest);
+```
+
+---
+
+## 🎬 Step 5: Load and Show Interstitial Ad
+
+### Kotlin
+
+```kotlin
+var mInterstitialAd: InterstitialAd? = null
+
+fun loadInterstitialAd(context: Context) {
+    val adRequest = AdRequest.Builder().build()
+    InterstitialAd.load(context, "ca-app-pub-6483271377992812/1699284347", adRequest,
+        object : InterstitialAdLoadCallback() {
+            override fun onAdLoaded(ad: InterstitialAd) {
+                mInterstitialAd = ad
+                mInterstitialAd?.show(this@MainActivity)
+            }
+
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                mInterstitialAd = null
+            }
+        })
+}
+```
+
+### Java
+
+```java
+InterstitialAd mInterstitialAd;
+
+void loadInterstitialAd(Context context) {
+    AdRequest adRequest = new AdRequest.Builder().build();
+
+    InterstitialAd.load(context, "ca-app-pub-6483271377992812/1699284347", adRequest,
+        new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                mInterstitialAd = interstitialAd;
+                mInterstitialAd.show(MainActivity.this);
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError adError) {
+                mInterstitialAd = null;
+            }
+        });
+}
+```
+
+---
+
+## ✅ Tips
+
+* Always test with **test ads** during development.
+* Show **Interstitial ads sparingly** (e.g. after CV generation or app exit).
+* Follow **AdMob policies** to avoid account issues.
+
+---
+
+> 📌 This guide ensures real AdMob integration for your **CV Builder AI app** in **Java or Kotlin** using the provided production App ID and Ad Unit IDs.
+
+```
+
+Let me know if you want the Kotlin version in a full working class structure or a custom AdManager.
+```

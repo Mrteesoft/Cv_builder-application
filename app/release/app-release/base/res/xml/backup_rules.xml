@@ -1,0 +1,5 @@
+
+{full-backup-content*0
+(include"	path."domaindatabase+*2
+*exclude"	path*"domain
+sharedpref-

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Phone dimensions -->
+    <dimen name="main_padding">20dp</dimen>
+    <dimen name="section_margin">24dp</dimen>
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="form_text_size">16sp</dimen>
+    <dimen name="form_hint_size">14sp</dimen>
+    <dimen name="form_padding">16dp</dimen>
+</resources>

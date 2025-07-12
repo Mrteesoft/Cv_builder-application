@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tablet dimensions -->
+    <dimen name="main_padding">32dp</dimen>
+    <dimen name="section_margin">40dp</dimen>
+    <dimen name="button_height">64dp</dimen>
+    <dimen name="text_large">28sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_small">16sp</dimen>
+</resources>

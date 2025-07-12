@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Small screen dimensions -->
+    <dimen name="main_padding">16dp</dimen>
+    <dimen name="section_margin">20dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="form_text_size">13sp</dimen>
+    <dimen name="form_hint_size">11sp</dimen>
+    <dimen name="form_padding">12dp</dimen>
+</resources>

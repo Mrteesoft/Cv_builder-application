@@ -1,0 +1,424 @@
+# 📄 CV/Resume Builder App – Developer Documentation
+
+## 📘 Overview
+
+The **CV Builder App** is a modern, mobile-first Android application built in Java or Kotlin, designed to help users create professional CVs effortlessly. With a smart **AI assistant**, clean UI, and instant export features, users can focus less on formatting and more on showcasing their strengths.
+
+---
+
+## 🚀 App Flow
+
+1. **Preload (Splash) Screen**
+2. **Welcome Dashboard**
+3. **Main Dashboard**
+4. **Template Selection**
+5. **AI Assistant Help**
+6. **Input Form**
+7. **CV Preview & Generation**
+8. **Export/Share CV (PDF)**
+9. **Monetization with AdMob**
+
+---
+
+## 🧭 User Journey
+
+### 1. 🌀 Preload Screen
+- Shows app logo with loading animation
+- Initializes assets and AdMob SDK
+- Duration: 2–3 seconds
+
+### 2. 👋 Welcome Dashboard
+- White background, simple interface
+- App logo + tagline: _"Your CV, Simplified by AI"_
+- Primary button: **Get Started**
+
+### 3. 🏠 Main Dashboard
+- Sections:
+  - **Create New CV**
+  - **View My CVs**
+  - **Settings**
+  - **Help (AI Assistant)**
+- Banner ad at bottom
+
+### 4. 🎨 Template Selection
+- List/Grid of templates (minimum of 2)
+- Each template has:
+  - Preview thumbnail
+  - “Select” button
+
+### 5. 🤖 AI Assistant (Optional but Recomm
+ended)
+- Chat interface for CV guidance
+- Suggests improvements and content
+- Helps with professional wording
+
+### 6. 📝 Input Form
+- Personal Information
+- Work Experience
+- Education
+- Skills
+- Additional sections (Projects, Certifications, etc.)
+
+### 7. 👁️ CV Preview & Generation
+- Real-time preview of selected template
+- Edit/modify sections
+- Generate final CV
+
+### 8. 📤 Export/Share
+- Export as PDF
+- Share via email/social media
+- Save to device storage
+
+---
+
+## 🗄️ Database Schema
+
+### SQLite Database Structure
+
+```sql
+-- Users table
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CV Templates table
+CREATE TABLE cv_templates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    template_name TEXT NOT NULL,
+    template_type TEXT NOT NULL,
+    preview_image_path TEXT,
+    layout_config TEXT, -- JSON string
+    is_premium BOOLEAN DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CV Documents table
+CREATE TABLE cv_documents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    template_id INTEGER NOT NULL,
+    cv_title TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (template_id) REFERENCES cv_templates(id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+-- Personal Information table
+CREATE TABLE personal_info (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    full_name TEXT NOT NULL,
+    email TEXT,
+    phone TEXT,
+    address TEXT,
+    city TEXT,
+    country TEXT,
+    postal_code TEXT,
+    profile_image_path TEXT,
+    professional_summary TEXT,
+    linkedin_url TEXT,
+    website_url TEXT,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Work Experience table
+CREATE TABLE work_experience (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    company_name TEXT NOT NULL,
+    job_title TEXT NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT,
+    is_current BOOLEAN DEFAULT 0,
+    location TEXT,
+    description TEXT,
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Education table
+CREATE TABLE education (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    institution_name TEXT NOT NULL,
+    degree TEXT NOT NULL,
+    field_of_study TEXT,
+    start_date TEXT,
+    end_date TEXT,
+    grade_gpa TEXT,
+    location TEXT,
+    description TEXT,
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Skills table
+CREATE TABLE skills (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    skill_name TEXT NOT NULL,
+    skill_level TEXT, -- Beginner, Intermediate, Advanced, Expert
+    skill_category TEXT, -- Technical, Soft, Language, etc.
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Projects table
+CREATE TABLE projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    project_name TEXT NOT NULL,
+    description TEXT,
+    technologies_used TEXT,
+    start_date TEXT,
+    end_date TEXT,
+    project_url TEXT,
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Certifications table
+CREATE TABLE certifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    certification_name TEXT NOT NULL,
+    issuing_organization TEXT,
+    issue_date TEXT,
+    expiry_date TEXT,
+    credential_id TEXT,
+    credential_url TEXT,
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- Languages table
+CREATE TABLE languages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cv_id INTEGER NOT NULL,
+    language_name TEXT NOT NULL,
+    proficiency_level TEXT, -- Native, Fluent, Conversational, Basic
+    display_order INTEGER DEFAULT 0,
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id) ON DELETE CASCADE
+);
+
+-- AI Chat History table
+CREATE TABLE ai_chat_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    cv_id INTEGER,
+    user_message TEXT NOT NULL,
+    ai_response TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (cv_id) REFERENCES cv_documents(id)
+);
+
+-- App Settings table
+CREATE TABLE app_settings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    setting_key TEXT NOT NULL,
+    setting_value TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    UNIQUE(user_id, setting_key)
+);
+```
+
+---
+
+## 📁 Optimal Folder Structure
+
+```
+faith/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/mrteesoft/faith/
+│   │   │   │   ├── activities/
+│   │   │   │   │   ├── SplashActivity.java
+│   │   │   │   │   ├── WelcomeActivity.java
+│   │   │   │   │   ├── MainActivity.java
+│   │   │   │   │   ├── TemplateSelectionActivity.java
+│   │   │   │   │   ├── CVFormActivity.java
+│   │   │   │   │   ├── CVPreviewActivity.java
+│   │   │   │   │   └── AIAssistantActivity.java
+│   │   │   │   ├── fragments/
+│   │   │   │   │   ├── PersonalInfoFragment.java
+│   │   │   │   │   ├── WorkExperienceFragment.java
+│   │   │   │   │   ├── EducationFragment.java
+│   │   │   │   │   ├── SkillsFragment.java
+│   │   │   │   │   ├── ProjectsFragment.java
+│   │   │   │   │   └── CertificationsFragment.java
+│   │   │   │   ├── adapters/
+│   │   │   │   │   ├── TemplateAdapter.java
+│   │   │   │   │   ├── WorkExperienceAdapter.java
+│   │   │   │   │   ├── EducationAdapter.java
+│   │   │   │   │   ├── SkillsAdapter.java
+│   │   │   │   │   ├── ProjectsAdapter.java
+│   │   │   │   │   └── ChatAdapter.java
+│   │   │   │   ├── models/
+│   │   │   │   │   ├── User.java
+│   │   │   │   │   ├── CVDocument.java
+│   │   │   │   │   ├── PersonalInfo.java
+│   │   │   │   │   ├── WorkExperience.java
+│   │   │   │   │   ├── Education.java
+│   │   │   │   │   ├── Skill.java
+│   │   │   │   │   ├── Project.java
+│   │   │   │   │   ├── Certification.java
+│   │   │   │   │   ├── Language.java
+│   │   │   │   │   ├── CVTemplate.java
+│   │   │   │   │   └── ChatMessage.java
+│   │   │   │   ├── database/
+│   │   │   │   │   ├── DatabaseHelper.java
+│   │   │   │   │   ├── dao/
+│   │   │   │   │   │   ├── UserDao.java
+│   │   │   │   │   │   ├── CVDocumentDao.java
+│   │   │   │   │   │   ├── PersonalInfoDao.java
+│   │   │   │   │   │   ├── WorkExperienceDao.java
+│   │   │   │   │   │   ├── EducationDao.java
+│   │   │   │   │   │   ├── SkillDao.java
+│   │   │   │   │   │   ├── ProjectDao.java
+│   │   │   │   │   │   ├── CertificationDao.java
+│   │   │   │   │   │   └── LanguageDao.java
+│   │   │   │   │   └── repositories/
+│   │   │   │   │       ├── CVRepository.java
+│   │   │   │   │       ├── UserRepository.java
+│   │   │   │   │       └── TemplateRepository.java
+│   │   │   │   ├── utils/
+│   │   │   │   │   ├── PDFGenerator.java
+│   │   │   │   │   ├── ImageUtils.java
+│   │   │   │   │   ├── DateUtils.java
+│   │   │   │   │   ├── ValidationUtils.java
+│   │   │   │   │   ├── SharedPrefsManager.java
+│   │   │   │   │   └── Constants.java
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── AIService.java
+│   │   │   │   │   ├── ExportService.java
+│   │   │   │   │   └── AdMobService.java
+│   │   │   │   ├── viewmodels/
+│   │   │   │   │   ├── CVViewModel.java
+│   │   │   │   │   ├── TemplateViewModel.java
+│   │   │   │   │   └── AIAssistantViewModel.java
+│   │   │   │   └── interfaces/
+│   │   │   │       ├── OnTemplateSelectedListener.java
+│   │   │   │       ├── OnCVSavedListener.java
+│   │   │   │       └── OnAIResponseListener.java
+│   │   │   ├── res/
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── activity_splash.xml
+│   │   │   │   │   ├── activity_welcome.xml
+│   │   │   │   │   ├── activity_main.xml
+│   │   │   │   │   ├── activity_template_selection.xml
+│   │   │   │   │   ├── activity_cv_form.xml
+│   │   │   │   │   ├── activity_cv_preview.xml
+│   │   │   │   │   ├── activity_ai_assistant.xml
+│   │   │   │   │   ├── fragment_personal_info.xml
+│   │   │   │   │   ├── fragment_work_experience.xml
+│   │   │   │   │   ├── fragment_education.xml
+│   │   │   │   │   ├── fragment_skills.xml
+│   │   │   │   │   ├── fragment_projects.xml
+│   │   │   │   │   ├── fragment_certifications.xml
+│   │   │   │   │   ├── item_template.xml
+│   │   │   │   │   ├── item_work_experience.xml
+│   │   │   │   │   ├── item_education.xml
+│   │   │   │   │   ├── item_skill.xml
+│   │   │   │   │   ├── item_project.xml
+│   │   │   │   │   ├── item_certification.xml
+│   │   │   │   │   └── item_chat_message.xml
+│   │   │   │   ├── drawable/
+│   │   │   │   │   ├── ic_launcher_background.xml
+│   │   │   │   │   ├── ic_launcher_foreground.xml
+│   │   │   │   │   ├── splash_background.xml
+│   │   │   │   │   ├── button_primary.xml
+│   │   │   │   │   ├── button_secondary.xml
+│   │   │   │   │   ├── edit_text_background.xml
+│   │   │   │   │   └── template_preview_border.xml
+│   │   │   │   ├── values/
+│   │   │   │   │   ├── strings.xml
+│   │   │   │   │   ├── colors.xml
+│   │   │   │   │   ├── styles.xml
+│   │   │   │   │   └── dimens.xml
+│   │   │   │   ├── values-night/
+│   │   │   │   │   ├── colors.xml
+│   │   │   │   │   └── styles.xml
+│   │   │   │   ├── mipmap-hdpi/
+│   │   │   │   ├── mipmap-mdpi/
+│   │   │   │   ├── mipmap-xhdpi/
+│   │   │   │   ├── mipmap-xxhdpi/
+│   │   │   │   ├── mipmap-xxxhdpi/
+│   │   │   │   └── xml/
+│   │   │   │       └── network_security_config.xml
+│   │   │   └── AndroidManifest.xml
+│   │   ├── test/
+│   │   │   └── java/com/mrteesoft/faith/
+│   │   │       ├── DatabaseTest.java
+│   │   │       ├── PDFGeneratorTest.java
+│   │   │       └── ValidationUtilsTest.java
+│   │   └── androidTest/
+│   │       └── java/com/mrteesoft/faith/
+│   │           ├── MainActivityTest.java
+│   │           └── CVFormTest.java
+│   ├── build.gradle
+│   └── proguard-rules.pro
+├── gradle/
+├── build.gradle
+├── gradle.properties
+├── settings.gradle
+├── local.properties
+├── README.md
+└── assets/
+    ├── templates/
+    │   ├── template_1_preview.png
+    │   ├── template_2_preview.png
+    │   ├── template_1_config.json
+    │   └── template_2_config.json
+    └── fonts/
+        ├── roboto_regular.ttf
+        ├── roboto_bold.ttf
+        └── open_sans_regular.ttf
+```
+
+---
+
+## 🔧 Key Architecture Components
+
+### Database Layer
+- **SQLite** for local data storage
+- **DAO Pattern** for data access
+- **Repository Pattern** for business logic
+- **Foreign Key Constraints** for data integrity
+
+### UI Layer
+- **Activities** for main screens
+- **Fragments** for form sections
+- **Adapters** for RecyclerViews
+- **ViewModels** for UI state management
+
+### Business Logic
+- **Services** for background operations
+- **Utils** for common functionality
+- **Models** for data representation
+- **Interfaces** for loose coupling
+
+### External Integrations
+- **AdMob SDK** for monetization
+- **AI API** for assistant features
+- **PDF Library** for document generation
+- **Image Processing** for profile photos
+
+---
+
+## 📱 Technical Stack
+
+- **Language**: Java/Kotlin
+- **Database**: SQLite
+- **PDF Generation**: iText or PDFBox
+- **Image Processing**: Glide/Picasso
+- **Ads**: Google AdMob
+- **AI Integration**: OpenAI API or similar
+- **Architecture**: MVVM with Repository Pattern
+- **Testing**: JUnit, Espresso
