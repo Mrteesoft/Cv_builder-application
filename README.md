@@ -2,7 +2,7 @@
 
 Professional AI-powered CV/Resume builder with templates, form guidance, PDF export, and AdMob monetization.
 
-## 🚀 Features
+##  Features
 
 - **AI Assistant** - Get help with CV content and suggestions
 - **Professional Templates** - Modern, Classic, and Elegant designs
@@ -11,14 +11,14 @@ Professional AI-powered CV/Resume builder with templates, form guidance, PDF exp
 - **Responsive Design** - Optimized for phones and tablets
 - **AdMob Integration** - Banner and interstitial ads for monetization
 
-## 📱 App Details
+##  App Details
 
 - **Package**: `com.mrteesoft.cvbuilderai`
 - **Version**: 1.1.0 (Version Code 4)
 - **Min SDK**: 24 (Android 7.0)
 - **Target SDK**: 34 (Android 14)
 
-## 🛠️ Technical Stack
+##  Technical Stack
 
 - **Language**: Java
 - **Architecture**: MVVM Pattern
@@ -28,7 +28,7 @@ Professional AI-powered CV/Resume builder with templates, form guidance, PDF exp
 - **UI**: Material Design
 - **Build**: Gradle
 
-## 📦 Dependencies
+##  Dependencies
 
 ```gradle
 implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -38,7 +38,7 @@ implementation 'com.google.android.gms:play-services-ads:22.6.0'
 implementation 'com.itextpdf:itext7-core:7.2.5'
 ```
 
-## 🎯 Key Components
+##  Key Components
 
 ### Activities
 - `SplashActivity` - App launch screen
@@ -54,7 +54,7 @@ implementation 'com.itextpdf:itext7-core:7.2.5'
 - **Photo picker** - Privacy-compliant image selection
 - **Storage Access Framework** - Modern file handling
 
-## 🔧 Build Instructions
+##  Build Instructions
 
 1. Clone the repository
 2. Open in Android Studio
@@ -65,7 +65,7 @@ implementation 'com.itextpdf:itext7-core:7.2.5'
 ./gradlew assembleDebug
 ```
 
-## 📋 Play Store Ready
+##  Play Store Ready
 
 - ✅ Production AdMob ads integrated
 - ✅ No restricted permissions
@@ -73,18 +73,18 @@ implementation 'com.itextpdf:itext7-core:7.2.5'
 - ✅ Professional UI/UX design
 - ✅ Version 4 ready for upload
 
-## 🎨 Design
+## Design
 
 - **Material Design 3** components
 - **Responsive layouts** for different screen sizes
 - **Professional color scheme** with blue accents
 - **Clean typography** with sans-serif fonts
 
-## 📄 License
+##  License
 
 This project is proprietary software developed by MrTeeSoft.
 
-## 👨‍💻 Developer
+##  Developer
 
 **MrTeeSoft**
 - GitHub: [@Mrteesoft](https://github.com/Mrteesoft)
